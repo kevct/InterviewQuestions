@@ -29,6 +29,7 @@ be partially filled, where an empty cell will be represented by the space
 character ' '.
 Here's an example and some starting code:
 """
+
 def validate_sudoku(board):
   # Fill this in.
   for i in range(len(board)):
@@ -42,7 +43,32 @@ def validate_sudoku(board):
               for l in range(len(board[1])):
                   if(l != j and board[i][j] == board[i][l]):
                       return False
+              if(not notInBox(board, i - i % 3, j - j % 3)):
+                  return False
   return True
+
+#This function sourced from https://www.geeksforgeeks.org/check-if-given-sudoku-board-configuration-is-valid-or-not/
+# Checks whether there is any duplicate  
+# in current 3x3 box or not.  
+def notInBox(arr, startRow, startCol):  
+  
+    st = set()  
+  
+    for row in range(0, 3):  
+        for col in range(0, 3):  
+            curr = arr[row + startRow][col + startCol]  
+  
+            # If already encountered before,  
+            # return false  
+            if curr in st:  
+                return False
+  
+            # If it is not an empty cell,  
+            # insert value at current cell in set  
+            if curr != ' ':  
+                st.add(curr)  
+          
+    return True
 
 board = [
     [5, ' ', 4, 6, 7, 8, 9, 1, 2],
