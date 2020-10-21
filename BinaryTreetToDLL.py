@@ -28,7 +28,7 @@ class btNode():
         self.left = None
         self.right = None
 
-def btToDLL(root, prev):
+def btToDLL(root, parent):
     node = Node(root.data)
     if(root.left):
         node.prev = btToDLL(root.left)
