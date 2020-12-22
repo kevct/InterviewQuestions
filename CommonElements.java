@@ -3,14 +3,15 @@ Given two lists V1 and V2 of sizes n and m respectively. Return the list of elem
 */
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 class CommonElements{
    public static void main(String[] args){
       int[] n = {3, 4, 2, 2, 4};
       int[] m = {3, 2, 2, 7};
       
-      int[] result = commonElements(n, m);
-      for(int i : result){
+      ArrayList<Integer> result = commonElements(n, m);
+      for(Integer i : result){
          System.out.print(i + " ");
       }
    }
@@ -22,21 +23,17 @@ class CommonElements{
    * @param m
    * @return An array containing the common elements
    */
-   static int[] commonElements(int[] n, int[] m){
-      int index = 0;
-      int[] result = new int[n.length];
+   static ArrayList<Integer> commonElements(int[] n, int[] m){
+      ArrayList<Integer> result = new ArrayList<Integer>();
       HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
       
       for(int i : n){
-         hm.put(i, 1);
-      }
-      for(int i : m){
          hm.put(i, hm.getOrDefault(i, 0) + 1);
       }
-      for(Integer i : hm.keySet()){
-         if(hm.get(i) > 1){
-            result[index] = i;
-            index++;
+      for(int i : m){
+         if(hm.get(i) != null && hm.get(i) > 0){
+            result.add(i);
+            hm.put(i, hm.getOrDefault(i, 0) - 1);
          }
       }
       
